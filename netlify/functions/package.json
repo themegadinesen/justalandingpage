@@ -1,0 +1,8 @@
+{
+  "name": "functions",
+  "version": "1.0.0",
+  "main": "signup.js",
+  "dependencies": {
+    "@supabase/supabase-js": "^1.28.5"
+  }
+}

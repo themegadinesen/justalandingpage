@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Landing Page</title>
+    <style>
+        /* Basic styling */
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 50px auto; text-align: center; }
+        h1 { color: #333; }
+        .features, .cta { margin: 20px 0; }
+        .form-group { margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Name</h1>
+        <p>Brief description of your product and its benefits.</p>
+        <div class="features">
+            <h2>Key Features</h2>
+            <ul>
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+                <li>Feature 3</li>
+            </ul>
+        </div>
+        <div class="cta">
+            <h2>Sign Up for Updates</h2>
+            <form id="signup-form">
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+
+            try {
+                const response = await fetch('/.netlify/functions/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    alert("Thank you for signing up!");
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("There was an error. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>
+
