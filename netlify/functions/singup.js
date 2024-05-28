@@ -1,6 +1,6 @@
 const { createClient } = require('@supabase/supabase-js');
 
-const supabaseUrl = 'https://njhevlmqfzthikhxxjuw.supabase.co';
+const supabaseUrl = 'https://njhevlmqfzthikhxxjuw.supabase.co/';
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -14,7 +14,7 @@ exports.handler = async (event) => {
     try {
         const { data, error } = await supabase
             .from('waiting_list')
-            .insert([{ email: email }]);
+            .insert([{ email: email, created_at: new Date() }]);
 
         if (error) throw error;
 
@@ -29,4 +29,3 @@ exports.handler = async (event) => {
         };
     }
 };
-
